@@ -1,0 +1,28 @@
+# Secrets — never commit these
+.env
+*.key
+*.pem
+*.crt
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# Actual malware / PCAPs (document notes only, not binaries)
+pcap_analysis/samples/*.pcap
+pcap_analysis/samples/*.cap
+*.exe
+*.dll
+*.bin
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

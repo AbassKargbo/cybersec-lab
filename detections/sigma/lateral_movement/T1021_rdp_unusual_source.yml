@@ -1,0 +1,27 @@
+title: RDP Login from Unusual Source
+id: a1b2c3d4-0001-0001-0001-000000000001
+status: experimental
+description: Detects RDP logins (Event ID 4624, logon type 10) from external or unusual IP ranges.
+references:
+  - https://attack.mitre.org/techniques/T1021/001/
+author: Abass
+date: 2024-01-01
+tags:
+  - attack.lateral_movement
+  - attack.t1021.001
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4624
+    LogonType: 10
+  filter:
+    IpAddress|startswith:
+      - '10.'
+      - '192.168.'
+      - '172.16.'
+  condition: selection and not filter
+falsepositives:
+  - Legitimate remote admin from known external IPs
+level: medium

@@ -1,0 +1,5 @@
+requests>=2.31.0
+python-dotenv>=1.0.0
+# Uncomment as you build out integrations:
+# splunk-sdk
+# pymisp

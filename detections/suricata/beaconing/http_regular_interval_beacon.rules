@@ -1,0 +1,14 @@
+# HTTP Beaconing — Regular interval check-ins to a single host
+# Best paired with Zeek conn.log analysis for jitter/interval stats
+# Reference: T1071.001 — Application Layer Protocol: Web Protocols
+
+alert http $HOME_NET any -> $EXTERNAL_NET any (
+    msg:"POSSIBLE HTTP Beaconing - Regular Interval Check-in";
+    flow:established,to_server;
+    content:"GET";
+    http_method;
+    threshold: type both, track by_src, count 10, seconds 300;
+    classtype:policy-violation;
+    sid:9000002;
+    rev:1;
+)

@@ -1,0 +1,13 @@
+# DNS Tunneling — Unusually long DNS query (possible data exfiltration)
+# Reference: T1071.004 — Application Layer Protocol: DNS
+# Tune the threshold based on your environment baseline
+
+alert dns any any -> any 53 (
+    msg:"POSSIBLE DNS Tunneling - Unusually Long DNS Query";
+    dns.query;
+    pcre:"/^.{50,}/";
+    threshold: type both, track by_src, count 5, seconds 60;
+    classtype:policy-violation;
+    sid:9000001;
+    rev:1;
+)
